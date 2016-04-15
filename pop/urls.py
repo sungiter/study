@@ -21,8 +21,7 @@ from .views import *
 urlpatterns = [
     url(r'^$', index,name='index'),
     url(r'^catagory_list/$',catagory_list,name='catagory_list'),
-    url(r'^catagory/$',catagory,name='catagory'),
-    url(r'^catagory/item/$',item,name='item'),
-    url(r'^catagory/item/detail/$',detail,name='detail'),
+    url(r'^(?P<catagory>\w+)/$',catagory,name='catagory'),
+    url(r'^(?P<catagory>\w+)/(?P<pk>\d+)/$',detail,name='detail'),
 ]
 

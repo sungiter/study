@@ -6,18 +6,19 @@ def index(request):
 	return HttpResponse("Hello,world. You're at the Pop index page.")
 
 def catagory_list(request):
-	catagory=Catagory.objects.all()[0].catagory
-	response="Hello,world. You're at the catagory list page"+'\n'+catagory
-	print response
-	return HttpResponse(response)
+	catagory_list=Catagory.objects.all()
+	context={'catagory_list':catagory_list,}
+	return render(request,'pop/catagory_list.html',context)
+	
 
-def catagory(request):
-	return HttpResponse("Hello,world. You're at the Pop catagory page.")
+def catagory(request,catagory):
+	item_list=Item.objects.filter(catagory__catagory=catagory)
+	context={'item_list':item_list}
+	return render(request,'pop/item_list.html',context)
 
-def item(request):
-	return HttpResponse("Hello,world. You're at the Pop item page.")
-
-def detail(request):
-	return HttpResponse("Hello,world. You're at the Pop detail page.")
+def detail(request,catagory,pk):
+	item=Item.objects.filter(catagory__catagory=catagory).get(pk=pk)
+	context={'item':item}
+	return render(request,'pop/detail.html',context)
 
 

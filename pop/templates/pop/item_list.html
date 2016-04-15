@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Item List . Study</title>
+	</head>
+	<body>
+		{% if item_list %}
+		{% for item in item_list %}
+			<li>{{item.question}}</li>
+		{% endfor %}
+		{% else %}
+			<p>No catagory added.</p>
+		{% endif %}
+	</body>
+</html>
