@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Catagory(models.Model):
 	catagory=models.CharField(max_length=20)
@@ -17,3 +18,19 @@ class Item(models.Model):
 	
 	def __unicode__(self):
 		return self.question
+
+
+class Master(models.Model):
+	user=User()
+	degree=models.TextField()
+
+
+	def set_degree(self,catagory):
+		if not Catagory.objects.filter(catagory=catagory):
+			self.degree={}
+		else:
+			self.degree={catagory:{},}
+			items=Items.objects.fliter(catagory_catagory=catagory)
+			for item in items:
+				self.degree[catagory][item.pk]=0
+			
