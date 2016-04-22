@@ -13,10 +13,25 @@ def choose_level(user,catagory):
 		choice=random.choice(rlist)
 		if not degree[choice]:
 			choose_level(user,catagory)
-	return choice
+	return choice,degree[choice],degree
 
-def choose_item(user,catagory,choice):
-	if 
+def choose_item(degrees):
+	return random.choice(degrees.keys)
+
+
+
+def make_desicion(item,answer):
+	if answer='y':
+		if degrees[item]<100
+			degress[item]+=10
+			if degress=100:
+				del degree['hover'][item]
+				degree['familiar'][item]=100
+	else:
+		if degress[item]>0:
+			degress[item]-=10
+		else:
+			degress[item]=0
 	
 
 
