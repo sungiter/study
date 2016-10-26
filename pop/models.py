@@ -4,57 +4,43 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-class Catagory(models.Model):
-	catagory=models.CharField(max_length=20)
+
+class Subject(models.Model):
+	subject=models.CharField(max_length=20,unique=True)
+	
+	def __unicode__(self):
+		return self.subject
+
+class Category(models.Model):
+	subject=models.ForeignKey(Subject)
+	category=models.CharField(max_length=20)
 
 	def __unicode__(self):
-		return self.catagory
+		return self.category
 
 class Item(models.Model):
-	catagory=models.ForeignKey(Catagory)
+	category=models.ForeignKey(Category)
 	question=models.TextField()
 	answer=models.TextField()
 	created_time=models.DateTimeField(default=timezone.now)
 	
 	def __unicode__(self):
-		return self.question
+		return unicode(self.question)
 
 
 class Master(models.Model):
-	user=models.OneToOneField(User,on_delete=models.CASCADE)
-	degree=models.TextField()
+	user=models.ForeignKey(User)
+	item=models.ManyToManyField('Item',related_name='item')
+	score=models.PositiveSmallIntegerField(default=0)
 
+	def __unicode__(self):
+		return self.item.get().question
 
-	def set_degree(self,catagory):
-		if not Catagory.objects.filter(catagory=catagory):
-			self.degree={}
-		else:
-			self.degree={catagory:{},}
-			new=self.degree[catagory]['new']={}
-			hover=self.degree[catagory]['hover']={}
-			familiar=self.degerr[catagory]['familiar']={}
-			items=Items.objects.fliter(catagory_catagory=catagory)
-			for item in items:
-				new[item.pk]=0
-			
-		
-	def del(self,pk):
-		if not Item.objects.filter(pk=pk):
-			print("itme %d is not exits"%pk)
-		else:
-			item=Item.objects.get(pk=pk)
-			catagory=item.catagory.catagory
-			del self.degree[catagory][pk]
-		
+class Statistics(models.Model):
+	user=models.OneToOneField(User)
+	remembered=models.TextField()
+	studying=models.CharField(max_length=200)
+	new=models.CharField(max_length=200)
 
-	def add(self,pk):
-		if not Item.objects.filter(pk=pk):
-			print("item %d is not add in the databases")
-		else:
-			item=Item.objects.get(pk=pk)
-			catagory=item.catagory.catagory
-			self.degree[catagory][pk]=0
-		
-
-	
-			
+	def __unicode__(self):
+		return unicode(self.user)	

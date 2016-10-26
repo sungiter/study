@@ -20,8 +20,6 @@ from .views import *
 
 urlpatterns = [
     url(r'^$', index,name='index'),
-    url(r'^catagory_list/$',catagory_list,name='catagory_list'),
-    url(r'^(?P<catagory>\w+)/$',catagory,name='catagory'),
-    url(r'^(?P<catagory>\w+)/(?P<pk>\d+)/$',detail,name='detail'),
+    url(r'detail/$',detail,name='detail'),
+    url(r'pop/$',pop,name='pop'),
 ]
-
