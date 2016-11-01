@@ -19,7 +19,9 @@ from django.conf.urls import url
 from .views import *
 
 urlpatterns = [
-    url(r'^$', index,name='index'),
-    url(r'detail/$',detail,name='detail'),
-    url(r'pop/$',pop,name='pop'),
+    url(r'^$', subject,name='subject'),
+    url(r'subject/$',subject,name='subject'),
+    url(r'pop/(?P<subject>\S+)/$',pop,name='pop'),
+    url(r'process/$',process,name='process'),
+    url(r'detail/(?P<pk>\d+)/$',detail,name='detail'),
 ]

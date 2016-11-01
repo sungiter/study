@@ -7,13 +7,16 @@ from django.contrib.auth.models import User
 
 class Subject(models.Model):
 	subject=models.CharField(max_length=20,unique=True)
+	description=models.TextField(null=True,blank=True)
 	
 	def __unicode__(self):
 		return self.subject
 
 class Category(models.Model):
+	order=models.PositiveSmallIntegerField(default=0)
 	subject=models.ForeignKey(Subject)
 	category=models.CharField(max_length=20)
+	description=models.TextField(null=True,blank=True)
 
 	def __unicode__(self):
 		return self.category
@@ -30,17 +33,15 @@ class Item(models.Model):
 
 class Master(models.Model):
 	user=models.ForeignKey(User)
-	item=models.ManyToManyField('Item',related_name='item')
+	item=models.ForeignKey(Item)
 	score=models.PositiveSmallIntegerField(default=0)
 
 	def __unicode__(self):
-		return self.item.get().question
+		return unicode(self.item)
 
 class Statistics(models.Model):
 	user=models.OneToOneField(User)
-	remembered=models.TextField()
-	studying=models.CharField(max_length=200)
-	new=models.CharField(max_length=200)
+	statistics=models.TextField()
 
 	def __unicode__(self):
 		return unicode(self.user)	

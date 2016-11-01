@@ -126,6 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #logging config
+#LOGGING_CONFIG=None
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -151,7 +152,7 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['console'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': False,
         },
         'myproject.custom': {

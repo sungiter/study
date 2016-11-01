@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Qin</title>
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'pop/style.css' %}" />
+	</head>
+	<body>
+		<div class='row'>
+			<div class='col-md-1'></div>
+			<div class='col-md-10'>
+				{% block content %}
+				{% endblock %}
+			</div>
+			<div class='col-md-1'></div>
+		</div>
+	</body>
+</html>

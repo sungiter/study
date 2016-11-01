@@ -1,0 +1,15 @@
+{% extends 'pop/base.html' %}
+{% block content %}
+<div class='subject-box'>
+{% if subjectList %}
+{% for subject in subjectList %}
+	<div class='subject'>
+	<h3><a href="{% url 'pop' subject.subject %}">{{subject.subject}}</a></h3>
+	</div>
+	<hr />
+{% endfor %}
+{% else %}
+	<p>No subject added.</p>
+{% endif %}
+</div>
+{% endblock %}

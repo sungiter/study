@@ -1,1 +1,55 @@
-{{item.question}}
+{% extends 'pop/base.html' %}
+{% block content %}
+<div class='question-box'>
+	<div class='question'>
+	{% if item.status %}
+	<p>All is remembered</p>
+	{% elif item %}
+        <p><b>问题：</b>{{item.question}}({{item.category}})</p>
+	<hr />
+	<script type="text/javascript">
+	$(document).ready(function (){
+		$("#yes").click(function () {
+			$.ajax({
+				type: "POST",
+				url: "/process/",
+				data: {
+					score: 2,
+					item_pk: {{item.pk}},
+					csrfmiddlewaretoken: '{{csrf_token}}'
+					},
+				success: function (data) {
+					if (data.status) {
+						window.location="{% url 'pop' item.category.subject.subject %}";
+					}
+				},
+			});
+		});
+		$("#no").click(function () {
+			$.ajax({
+				type: "POST",
+				url: "/process/",
+				data: {
+					score: 1,
+					item_pk: {{item.pk}},
+					csrfmiddlewaretoken: '{{csrf_token}}'
+					},
+				success: function (data) {
+					if (data.status) {
+						window.location="{% url 'detail' item.pk %}";
+					}
+				},
+			});
+		});
+	});
+	</script>
+
+        <button id='no'><b>不会</b></button>&nbsp;&nbsp;
+        <button id='yes'><b>会</b></button>
+	{% else %}
+	<p>No proper item in the database</p>
+	{% endif %}
+	</div>
+</div>
+{% endblock %}
+

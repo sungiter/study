@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Item . Study</title>
-	</head>
-	<body>
-		<p>Question:{{item.question}}</p>
-		<p>Answer:{{item.answer}}</p>
-	</body>
-</html>
+{% extends 'pop/base.html' %}
+{% block content %}
+<div class='question-box'>
+	<div class='question'>
+	<p><b>问题:</b>{{item.question}}</p>
+	<hr />
+	<p><b>答案:</b>{{item.answer}}</p>
+<button><a href="{% url 'pop' item.category.subject.subject %}"><b>下一个</b></a></button>
+</div>
+</div>
+{% endblock %}
